@@ -31,6 +31,7 @@ const TEST_WORKFLOWS: Resource[] = vi.hoisted(() => [
 		createdAt: new Date().toISOString(),
 		updatedAt: new Date().toISOString(),
 		active: true,
+		isArchived: false,
 		readOnly: false,
 		homeProject: TEST_HOME_PROJECT,
 	},
@@ -41,6 +42,7 @@ const TEST_WORKFLOWS: Resource[] = vi.hoisted(() => [
 		createdAt: new Date().toISOString(),
 		updatedAt: new Date().toISOString(),
 		active: true,
+		isArchived: false,
 		readOnly: false,
 		homeProject: TEST_HOME_PROJECT,
 	},
@@ -148,5 +150,51 @@ describe('ResourcesListLayout', () => {
 		await waitAllPromises();
 		expect(emitted()['update:pagination-and-sort']).toBeTruthy();
 		expect(emitted()['update:pagination-and-sort'].pop()).toEqual([TEST_LOCAL_STORAGE_VALUES]);
+	});
+
+	it('should display info text if filters are applied', async () => {
+		const { getByTestId } = renderComponent({
+			props: {
+				resources: TEST_WORKFLOWS,
+				type: 'list-paginated',
+				showFiltersDropdown: true,
+				filters: {
+					search: '',
+					homeProject: '',
+					showArchived: true,
+					testFilter: true,
+				},
+			},
+		});
+
+		await waitAllPromises();
+		expect(getByTestId('resources-list-filters-applied-info')).toBeInTheDocument();
+		expect(getByTestId('workflows-filter-reset')).toBeInTheDocument();
+		expect(getByTestId('resources-list-filters-applied-info').textContent).toContain(
+			'Some workflows may be hidden since filters are applied.',
+		);
+	});
+
+	it('should display different info text if all applied filters display more results', async () => {
+		const { getByTestId } = renderComponent({
+			props: {
+				resources: TEST_WORKFLOWS,
+				type: 'list-paginated',
+				showFiltersDropdown: true,
+				filters: {
+					search: '',
+					homeProject: '',
+					tags: [],
+					showArchived: true,
+				},
+			},
+		});
+
+		await waitAllPromises();
+		expect(getByTestId('resources-list-filters-applied-info')).toBeInTheDocument();
+		expect(getByTestId('workflows-filter-reset')).toBeInTheDocument();
+		expect(getByTestId('resources-list-filters-applied-info').textContent).toContain(
+			'Filters are applied.',
+		);
 	});
 });

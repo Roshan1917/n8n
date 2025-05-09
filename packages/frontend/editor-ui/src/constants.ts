@@ -563,6 +563,9 @@ export const enum VIEWS {
 	FOLDERS = 'Folders',
 	PROJECTS_FOLDERS = 'ProjectsFolders',
 	INSIGHTS = 'Insights',
+	SHARED_WITH_ME = 'SharedWithMe',
+	SHARED_WORKFLOWS = 'SharedWorkflows',
+	SHARED_CREDENTIALS = 'SharedCredentials',
 }
 
 export const EDITABLE_CANVAS_VIEWS = [VIEWS.WORKFLOW, VIEWS.NEW_WORKFLOW, VIEWS.EXECUTION_DEBUG];
@@ -614,6 +617,8 @@ export const enum WORKFLOW_MENU_ACTIONS {
 	PUSH = 'push',
 	SETTINGS = 'settings',
 	DELETE = 'delete',
+	ARCHIVE = 'archive',
+	UNARCHIVE = 'unarchive',
 	SWITCH_NODE_VIEW_VERSION = 'switch-node-view-version',
 	RENAME = 'rename',
 }
@@ -756,12 +761,6 @@ export const AI_CREDITS_EXPERIMENT = {
 	variant: 'variant',
 };
 
-export const SCHEMA_PREVIEW_EXPERIMENT = {
-	name: '028_schema_preview',
-	control: 'control',
-	variant: 'variant',
-};
-
 export const WORKFLOW_BUILDER_EXPERIMENT = {
 	name: '30_workflow_builder',
 	control: 'control',
@@ -772,7 +771,6 @@ export const EXPERIMENTS_TO_TRACK = [
 	CREDENTIAL_DOCS_EXPERIMENT.name,
 	EASY_AI_WORKFLOW_EXPERIMENT.name,
 	AI_CREDITS_EXPERIMENT.name,
-	SCHEMA_PREVIEW_EXPERIMENT.name,
 	WORKFLOW_BUILDER_EXPERIMENT.name,
 ];
 
