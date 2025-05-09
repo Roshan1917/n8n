@@ -72,9 +72,6 @@ onMounted(() => {
 
 .logoText {
 	margin-left: var(--spacing-5xs);
-	path {
-		fill: var(--color-text-dark);
-	}
 }
 
 .authView {
@@ -88,7 +85,7 @@ onMounted(() => {
 }
 
 .logoText {
-	margin-left: var(--spacing-xs);
+	margin-left: var(--spacing-s);
 	margin-right: var(--spacing-3xs);
 }
 
